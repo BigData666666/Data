@@ -36,19 +36,19 @@ smoke=0
 alco=0
 active=1
 
-# 逻辑回归
-model3 = LogisticRegression()
-model3.fit(X_train_scaled, train_y)
-
+#逻辑回归
+model = LogisticRegression(C=1.5)
+model.fit(X_train_scaled, train_y)
+ 
 # 预测测试集
-y_pred3 = model3.predict(X_test_scaled)
+y_pred = model.predict(X_test_scaled)
 
 # 计算并输出预测的患病概率
 new_sample = np.array([[age, gender, height, weight, ap_hi, ap_lo,cholesterol, gluc, smoke, alco, active]])
 new_sample_scaled = scaler.transform(new_sample)
-probability_of_disease3 = model3.predict_proba(new_sample_scaled)[:, 1]
-print("患病概率:", probability_of_disease3)
+probability_of_disease = model.predict_proba(new_sample_scaled)[:, 1]
+print("患病概率:", probability_of_disease)
 
 # 评估模型
-accuracy3 = model3.score(X_test_scaled, test_y)
-print("准确率:", accuracy3)
+accuracy = model.score(X_test_scaled, test_y)
+print("准确率:", accuracy)
